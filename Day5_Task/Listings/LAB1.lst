@@ -1,0 +1,135 @@
+C51 COMPILER V9.60.7.0   LAB1                                                              08/14/2026 10:55:17 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LAB1
+OBJECT MODULE PLACED IN .\Objects\LAB1.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE LAB1.C OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\Listings
+                    -\LAB1.lst) TABS(2) OBJECT(.\Objects\LAB1.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          
+   3          sbit LED_PIN = P1^0;
+   4          int count = 0;
+   5          void timer_count()
+   6          {
+   7   1        TMOD = 0x01; // CONFIGURATION OF MODE
+   8   1        TH0 = 0xF3; // HIGHER BIT
+   9   1        TL0 = 0x66; // LOWER BIT
+  10   1        
+  11   1        
+  12   1          ET0 = 1; // ENABLING TIMER 0 INTERRUPT 
+  13   1          EA = 1; // ENABLING GLOBAL INTERRUPT
+  14   1          TR0 = 1; // STARTING TIMER 0
+  15   1          
+  16   1          TF0 = 0; // CLEAR OVERFLOW INTERRUPT
+  17   1      
+  18   1          
+  19   1          while(TF0 == 0) {}
+  20   1          TR0 = 0;
+  21   1          count ++;
+  22   1            
+  23   1          if(count >= 229)
+  24   1          {
+  25   2            count = 0;
+  26   2            LED_PIN = ~LED_PIN;
+  27   2            
+  28   2          }
+  29   1      
+  30   1      }
+  31          
+  32          void main()
+  33          {
+  34   1        LED_PIN = 0;
+  35   1      
+  36   1        while(1)
+  37   1        {
+  38   2          timer_count();
+  39   2        }
+  40   1      
+  41   1      
+  42   1      }
+C51 COMPILER V9.60.7.0   LAB1                                                              08/14/2026 10:55:17 PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION timer_count (BEGIN)
+                                           ; SOURCE LINE # 5
+                                           ; SOURCE LINE # 6
+                                           ; SOURCE LINE # 7
+0000 758901            MOV     TMOD,#01H
+                                           ; SOURCE LINE # 8
+0003 758CF3            MOV     TH0,#0F3H
+                                           ; SOURCE LINE # 9
+0006 758A66            MOV     TL0,#066H
+                                           ; SOURCE LINE # 12
+0009 D2A9              SETB    ET0
+                                           ; SOURCE LINE # 13
+000B D2AF              SETB    EA
+                                           ; SOURCE LINE # 14
+000D D28C              SETB    TR0
+                                           ; SOURCE LINE # 16
+000F C28D              CLR     TF0
+0011         ?C0001:
+                                           ; SOURCE LINE # 19
+0011 308DFD            JNB     TF0,?C0001
+                                           ; SOURCE LINE # 20
+0014 C28C              CLR     TR0
+                                           ; SOURCE LINE # 21
+0016 0500        R     INC     count+01H
+0018 E500        R     MOV     A,count+01H
+001A 7002              JNZ     ?C0008
+001C 0500        R     INC     count
+001E         ?C0008:
+                                           ; SOURCE LINE # 23
+001E C3                CLR     C
+001F 94E5              SUBB    A,#0E5H
+0021 E500        R     MOV     A,count
+0023 6480              XRL     A,#080H
+0025 9480              SUBB    A,#080H
+0027 4007              JC      ?C0004
+                                           ; SOURCE LINE # 24
+                                           ; SOURCE LINE # 25
+0029 E4                CLR     A
+002A F500        R     MOV     count,A
+002C F500        R     MOV     count+01H,A
+                                           ; SOURCE LINE # 26
+002E B290              CPL     LED_PIN
+                                           ; SOURCE LINE # 28
+                                           ; SOURCE LINE # 30
+0030         ?C0004:
+0030 22                RET     
+             ; FUNCTION timer_count (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 32
+                                           ; SOURCE LINE # 33
+                                           ; SOURCE LINE # 34
+0000 C290              CLR     LED_PIN
+0002         ?C0005:
+                                           ; SOURCE LINE # 36
+                                           ; SOURCE LINE # 37
+                                           ; SOURCE LINE # 38
+0002 120000      R     LCALL   timer_count
+                                           ; SOURCE LINE # 39
+C51 COMPILER V9.60.7.0   LAB1                                                              08/14/2026 10:55:17 PAGE 3   
+
+0005 80FB              SJMP    ?C0005
+             ; FUNCTION main (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     56    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
