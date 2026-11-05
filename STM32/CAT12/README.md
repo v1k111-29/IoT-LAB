@@ -114,3 +114,11 @@ Connection: close
 ### 3. Inference
 
 Opening `http://<IP Address>/` in a browser on the same network shows the temperature measured by the BME280. The STM32 builds a valid raw HTTP response with the correct Content-Length and sends it through the ESP8266, showing how sensor data can be served over Wi-Fi using AT commands.
+
+---
+
+## My Keil MDK Project
+
+- **Project folder:** [`TASK12_BME280`](TASK12_BME280/)
+- **Board:** NUCLEO-F401RE, BME280 on I2C1 PB6/PB7, USART1 PA9/PA10 to PuTTY
+- **Logic:** Initialises the BME280 with the Bosch API (1x oversampling, normal mode) and prints temperature, humidity and pressure every 2 s.

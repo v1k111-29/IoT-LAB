@@ -146,3 +146,11 @@ The press is classified by how long the button is held, measured without any blo
 ### 3. Inference
 
 A short press toggles the LED and a long press of 1 second or more starts or stops continuous blinking. Measuring the press duration with `HAL_GetTick()` time stamps instead of a blocking delay keeps the program responsive, so the LED keeps blinking while the button is being read.
+
+---
+
+## My Keil MDK Project
+
+- **Project folder:** [`Led_Toggle`](Led_Toggle/)
+- **Board:** Blue Pill STM32F103C8T6, LED PC13 (active-low), switch PA9 (pull-up)
+- **Logic:** Short press (< 1 s) toggles the LED. Long press (>= 1 s) starts or stops 200 ms blinking. 30 ms debounce.

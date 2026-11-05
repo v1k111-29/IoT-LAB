@@ -131,3 +131,11 @@ The duration of each press is measured with `HAL_GetTick()` time stamps, without
 ### 3. Inference
 
 The STM32 distinguishes short and long presses of B1: a short press toggles LD2 and a long press starts or stops blinking. Measuring the press with time stamps keeps the loop running, so the LED blinks and the button is read at the same time.
+
+---
+
+## My Keil MDK Project
+
+- **Project folder:** [`Uart_WIFI`](Uart_WIFI/)
+- **Board:** Blue Pill STM32F103C8T6, USART1 PA9/PA10 to Wemos, USART2 PA2/PA3 to PuTTY
+- **Logic:** Sends AT, AT+GMR, AT+CWMODE=1, AT+CWJAP and AT+CIFSR and prints each reply on PuTTY. After that, any AT command typed in PuTTY is sent to the Wemos.

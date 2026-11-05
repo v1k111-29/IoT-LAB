@@ -79,8 +79,6 @@ static void MX_USART1_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-/* USER CODE BEGIN 0 */
-
 // reads sensor data 
 int8_t user_i2c_read(uint8_t reg_addr, uint8_t *reg_data,
                      uint32_t len, void *intf_ptr)
@@ -124,8 +122,6 @@ void user_delay_us(uint32_t period, void *intf_ptr)
         HAL_Delay(period / 1000 + (period % 1000 != 0));
     }
 }
-
-/* USER CODE END 0 */
 
 /* USER CODE END 0 */
 
@@ -184,9 +180,6 @@ int main(void)
   // 5. Handshake with the MQTT broker
   MQTT_connectBroker(&mqttSetting);
 	HAL_Delay(2000);
-										
-
-/* USER CODE BEGIN 2 */
 
 HAL_Delay(100);
 
@@ -238,12 +231,11 @@ else
     rslt = BME280_E_DEV_NOT_FOUND;
 }
 
-/* USER CODE END 2 */
-
-  /* USER CODE END 2 */
 	 MQTT_publishTopic("stm32/leela", "Hi friends ", QoS0);
 	 MQTT_publishTopic("stm32/leela", " I am Leelaa Goutham", QoS0);
 	 MQTT_publishTopic("stm32/leela", "But I have an another name , Gothic Baddie" , QoS0);
+
+  /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
